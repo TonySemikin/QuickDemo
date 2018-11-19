@@ -1,0 +1,838 @@
+$color-white: #fbfeff;
+$color-black: #131212;
+$blue: #4A58FF;
+$dark-green: #009104;
+$red: #C22521;
+$light-red: #FFD5D2;
+
+@mixin glass($left, $top, $width, $height, $color, $blur) {
+  content: ' ';
+
+  position: absolute;
+  left: $left;
+  right: 0;
+  top: $top;
+  bottom: 0;
+
+  width: $width;
+  height: $height;
+
+  background: inherit;
+  box-shadow: inset 0 0 0 3000px $color;
+  filter: blur($blur);
+}
+
+@mixin flexBox($direction, $align, $justifyCont) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justifyCont;
+  flex-flow: $direction;
+}
+
+@mixin defaultButton {
+  position: relative;
+  transform: translateX(0);
+
+  display: block;
+  width: 10rem;
+  height: 4rem;
+
+  margin: 15px;
+
+  opacity: 1;
+  cursor: pointer;
+  background-color: $blue;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.4);
+
+  border: none;
+  border-radius: 100px;
+  outline: none;
+
+  font-size: 1.3rem;
+  color: $color-white;
+}
+
+@mixin backgroundCover {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: top;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+
+  color: $color-white;
+  font-family: CabinSketch;
+
+  & .login_container {
+    position: relative;
+
+    height: 100%;
+    width: 100%;
+
+    @include flexBox(column, center, center);
+
+    opacity: 1;
+
+    @include backgroundCover;
+    background-image: url('../assets/backgrounds/25.jpg');
+
+    animation: fadeIn 1s ease-out 0.2s, scaleOut 3s ease-out 0.2s;
+    animation-fill-mode: backwards;
+
+    &::before {
+      content: ' ';
+
+      width: 100%;
+      height: 100%;
+
+      opacity: 1;
+      background: url('../assets/overlay/16.png') repeat;
+
+    }
+
+    & h1 {
+      position: absolute;
+      top: 3%;
+
+      width: 100%;
+
+      font-size: 7rem;
+      letter-spacing: 1.4rem;
+      text-shadow: 0 0 15px black;
+      text-align: center;
+
+      animation: fadeIn 1s ease-out 0.45s;
+      animation-fill-mode: backwards;
+    }
+
+    & .login_window {
+      position: absolute;
+      min-width: 35rem;
+      min-height: 35rem;
+      width: 23%;
+      height: 40%;
+
+      animation: moveInBottom 0.4s ease-out 0.5s;
+      animation-fill-mode: backwards;
+
+      overflow: hidden;
+
+      background: inherit;
+      box-shadow: -2px -2px 10px rgba(0, 0, 0, .3);
+
+      border-radius: 15px;
+    }
+  }
+
+  & .navigation {
+    @include flexBox(row, center, flex-start);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+
+    height: 5vh;
+    min-height: 4rem;
+    width: 60vw;
+
+    background: rgba(0, 0, 0, 0.9);
+    border-bottom: 1px solid rgba(0,0,0, 0.1);
+  }
+
+  & .status {
+    @include flexBox(row, center, flex-end);
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 3;
+
+    height: 5vh;
+    min-height: 4rem;
+    width: 40vw;
+
+    background: rgba(0, 0, 0, 0.9);
+    border-bottom: 1px solid rgba(0,0,0, 0.1);
+  }
+
+  & .body {
+    position: absolute;
+    top:5vh;
+
+    height: 95vh;
+    width: 100vw;
+
+    @include backgroundCover;
+    background-image: url('../assets/backgrounds/26.jpg');
+  }
+}
+
+.login_window {
+  &::before {
+    @include glass(-25px, -25px, 120%, 120%, rgba(0, 0, 50, .2), 17px);
+  }
+
+  & label {
+    position: absolute;
+    top: 27%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 90%;
+
+    display: inline-block;
+    backface-visibility: hidden;
+
+    font-size: 1.8rem;
+    text-shadow: 0 0 3px rgba(40, 40, 40, 1);
+    text-align: center;
+  }
+
+  &.first label {
+    top: 20%;
+  }
+
+  & .input {
+    position: absolute;
+    top: 43%;
+    left: 20%;
+
+    display: inline-block;
+    width: 60%;
+    height: 4rem;
+    overflow: hidden;
+
+    background: inherit;
+    border-radius: 100px;
+
+    &::before {
+      @include glass(-10px, -10px, 140%, 140%, rgba(0, 0, 20, .35), 3px);
+    }
+
+    & input {
+      position: absolute;
+      transform: scale(1.01);
+
+      display: block;
+      box-sizing: content-box;
+      width: 100%;
+      height: 100%;
+
+      background-color: rgba(255, 255, 255, 0.1);
+      box-shadow: inset 0 0 15px rgba(0, 0, 20, 0.7);
+
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 100px;
+      outline: none;
+
+      color: $color-white;
+      font-size: 1.5rem;
+      text-shadow: 0px 0px 2px rgba(255, 255, 255, 0.5);
+      text-align: center;
+
+      &.error {
+        box-shadow: inset 0 0 15px rgba($red, 0.9);
+        border: 1px solid rgba($red, 0.6);
+      }
+    }
+  }
+
+  & span.error {
+    position: absolute;
+    top: 53.5%;
+
+    display: inline-block;
+    width: 100%;
+
+    color: $light-red;
+    text-align: center;
+  }
+
+  & div.actions {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 80%;
+
+    @include flexBox(row, center, center);
+
+    & button {
+      @include defaultButton;
+
+      &:after {
+        content: '';
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+
+        border-radius: 10rem;
+
+        transition: all .4s;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: inset 0 0px 15px rgba(255, 255, 255, 0.5);
+
+        &::after {
+          transform: scaleX(1.3) scaleY(1.6);
+
+          opacity: 0;
+          background-color: rgba($blue, .6);
+        }
+      }
+
+      &:active {
+        transform: translateY(2px);
+      }
+    }
+
+    & button:nth-child(2) {
+      background-color: $red;
+
+      &::after {
+        background-color: rgba($red, .6);
+      }
+    }
+  }
+}
+
+.navigation {
+  & ul {
+    @include flexBox(row, center, center);
+  }
+
+  & a {
+    width: 10rem;
+    margin: 0 1px;
+
+    transition: 0.3s all;
+
+    display: inline-block;
+
+    background: rgba(245, 245, 255, 1);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
+
+    border-radius: 100px;
+
+    color: $color-black;
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 4.5vh;
+
+    &:hover {
+      background: rgba(30, 30, 30, 1);
+      box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.5);
+
+      color: $color-white;
+    }
+
+    &.active {
+      background: rgba(170, 2, 0, 1);
+      box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.5);
+
+      color: $color-white;
+
+      transition: 0.7s all;
+      animation: none;
+    }
+  }
+}
+
+.status {
+  & div {
+    height: 100%;
+    margin: 0 10px;
+
+    @include flexBox(row, center, center);
+    font-size: 1.5rem;
+
+    & img {
+      transform: scale(0.7);
+
+      height: 100%;
+
+      display: block;
+      object-fit: contain;
+    }
+
+    & span {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    &.user_params span {
+      width: 2vw;
+      display: inline-block;
+    }
+
+    &#bank_account_label span {
+      width: auto;
+    }
+    &#pulse_label {
+      border-radius: 5px;
+
+      &.dying {
+        animation: 2s blinkRed ease-out infinite;
+      }
+
+      & span {
+        width: auto;
+      }
+    }
+  }
+}
+
+.body {
+  &::before {
+    content: ' ';
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0.9;
+    background: url('../assets/overlay/15.png') repeat, rgba(0, 0, 0, 0.8);
+  }
+
+  &::after {
+    content: ' ';
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    background: black;
+
+    animation: 1s fadeOut ease-out;
+  }
+
+  & .start_message {
+    position: absolute;
+    top: 35%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+
+    font-size: 4rem;
+  }
+
+  & ul {
+    @include backgroundCover;
+
+    &::before {
+      content: ' ';
+
+      position: absolute;
+      z-index: -1;
+
+      width: 100%;
+      height: 100%;
+
+      background: url('../assets/overlay/16.png') repeat, rgba(0, 0, 0, 0.3);
+    }
+
+    &.jobs {
+      position: relative;
+      z-index: 1;
+
+      background-image: url('../assets/backgrounds/25.jpg');
+    }
+
+  }
+}
+
+.jobs {
+  height: 100%;
+  width: 100%;
+
+  @include flexBox(row, center, center);
+  backface-visibility: hidden;
+
+  & li {
+    width: 14rem;
+    height: 20rem;
+
+    margin: 1.5rem;
+
+    background: inherit;
+    visibility: hidden;
+
+    animation: 0.5s moveInBottom ease-out;
+  }
+
+  & button {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
+    width: 14rem;
+    height: 14rem;
+
+    background: inherit;
+    visibility: visible;
+    backface-visibility: hidden;
+    cursor: pointer;
+
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: -3px -3px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+
+    color: $color-black;
+    font-size: 1.7rem;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+
+    &::after {
+      @include glass(-25px, -25px, 20rem, 20rem, rgba(255, 255, 255, .8), 10px);
+      z-index: -1;
+      backface-visibility: hidden;
+    }
+  }
+
+  & .requirements {
+    position: relative;
+    visibility: visible;
+    overflow: hidden;
+    z-index: 1;
+
+    width: 14rem;
+    height: 5rem;
+
+    margin-top: 1rem;
+
+    background: inherit;
+    backface-visibility: hidden;
+    cursor: default;
+
+    border-radius: 10px;
+
+    text-align: center;
+    line-height: 5rem;
+    word-wrap: normal;
+
+    &::after {
+      @include glass(-25px, -25px, 20rem, 20rem, rgba(0, 150, 0, .7), 10px);
+      z-index: -1;
+    }
+
+  }
+
+  & li.available {
+    & button {
+      &:active {
+        transform: scale(0.99);
+      }
+    }
+  }
+
+  & li.unavailable {
+    & button {
+      border: 1px solid rgba(0, 0, 0, 0.6);
+      color: rgba(255, 255, 255, 0.6);
+
+      &:active {
+        transform: none;
+        animation: moveLeftRight 0.2s;
+        animation-iteration-count: 3;
+      }
+
+      &::after {
+        z-index: -1;
+        box-shadow: inset 0 0 0 3000px rgba(50, 50, 50, .5);
+      }
+    }
+
+    & .requirements {
+      color: rgba(255, 255, 255, 0.6);
+
+      &::after {
+        z-index: -1;
+        box-shadow: inset 0 0 0 3000px rgba(50, 50, 50, .5);
+      }
+    }
+  }
+}
+
+.purchases, .wives {
+  width: 100%;
+  min-height: 100%;
+
+  @include flexBox(row, center, center);
+  flex-wrap: wrap;
+  align-content: center;
+
+  @include backgroundCover;
+  background-image: url('../assets/backgrounds/25.jpg');
+
+  & .standard_tile {
+    position: relative;
+    overflow: hidden;
+
+    width: 20vw;
+    height: 20vw;
+
+    margin: 3vw;
+
+    box-shadow: -20px 10px 45px rgba(256, 236, 236, 0.2);
+    cursor: pointer;
+
+    border-radius: 17px;
+    border: 1px solid rgba(155, 155, 155, 1);
+
+    color: $color-black;
+
+    animation: 0.5s moveInBottom ease-out;
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    & .name {
+      width: 100%;
+      height: 15%;
+
+      @include flexBox(row, center, center);
+
+      background-color: white;
+      box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.4);
+
+      border-radius: 17px 17px 0 0;
+
+      font-size: 1.7rem;
+
+      h3 {
+        text-align: center;
+      }
+    }
+
+    & .price p, .title p {
+      position: absolute;
+      top: 15%;
+      left: 0;
+
+      width: 40%;
+      height: 13%;
+
+      @include flexBox(row, center, center);
+
+      background-color: rgba(256, 256, 256, .95);
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, .4);
+
+      border-radius: 0 6px 6px 0px;
+
+      font-size: 1.4rem;
+
+      p {
+        text-align: center;
+      }
+    }
+
+    & img {
+      width: 100%;
+      height: 70%;
+
+      display: block;
+      text-align: center;
+      object-fit: cover;
+      vertical-align: bottom;
+
+      background-color: rgba(255, 255, 255, 1);
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+
+    }
+
+    & button {
+      width: 100%;
+      height: 16%;
+      cursor: pointer;
+
+      background-color: rgba(256, 256, 256, 0.9);
+      box-shadow: inset 0 0 10px rgba(256, 256, 256, 0.7);
+
+      border: none;
+
+      color: $color-white;
+      font-size: 1.7rem;
+    }
+  }
+
+  & li.bought, li.married {
+    box-shadow: -20px 10px 45px rgba(256, 236, 236, 0.2), 0px 0px 45px rgba(255, 215, 0, 0.8);
+    border: 1px solid rgba(255,215,0, 0.5);
+    transition: 0.4s box-shadow, 0.1s transform;
+
+    & button {
+      background-color: $red;
+      transition: 0.4s all;
+    }
+  }
+  & li.non-bought, li.divorced, li.available {
+    box-shadow: -20px 10px 45px rgba(256, 236, 236, 0.2);
+    transition: 0.4s box-shadow, 0.1s transform;
+
+    & button {
+      background-color: $dark-green;
+      transition: 0.4s all;
+    }
+  }
+  & li.unavailable {
+
+    & button {
+      background-color: grey;
+    }
+  }
+}
+
+.wives {
+  padding: 0 20vw;
+
+  & .title {
+    visibility: hidden;
+  }
+}
+
+.modal_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 6;
+
+  width: 100%;
+  height: 100%;
+
+  color: $color-black;
+  font-family: CabinSketch;
+
+  @include flexBox(row, center, center);
+
+  background-color: rgba(0, 0, 0, 0.8);
+
+  animation: 0.5s fadeIn ease-out;
+
+
+  & .modal {
+    position: relative;
+    width: 30vw;
+    min-width: 45rem;
+    min-height: 35rem;
+    height: 35vh;
+
+    @include flexBox(column, center, center);
+
+    background-color: rgba(251, 254, 255, 1);
+    box-shadow: inset 0 0 35px rgba($dark-green, 0.9);
+
+    border-radius: 15px;
+
+    & button {
+      @include defaultButton;
+
+      &:after {
+        content: ' ';
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+
+        height: 100%;
+        width: 100%;
+
+        display: inline-block;
+
+        border-radius: 10rem;
+        transition: all .4s;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: inset 0 0px 15px rgba(255, 255, 255, 0.5);
+
+        &::after {
+          transform: scaleX(1.3) scaleY(1.6);
+          opacity: 0;
+          background-color: rgba($blue, .6);
+        }
+      }
+
+      &:active {
+        transform: translateY(2px);
+      }
+    }
+
+    & h3 {
+      width: 80%;
+      height: 24%;
+
+      border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+
+      font-size: 3rem;
+      text-align: center;
+      line-height: 8rem;
+
+      span {
+        color: $dark-green;
+      }
+    }
+
+    & p {
+      width: 90%;
+      height: 67%;
+
+      font-size: 1.5rem;
+    }
+
+    & .reward {
+      width: 80%;
+      height: 15%;
+
+      @include flexBox(row, center, center);
+
+      border-top: 1px solid rgba(128, 128, 128, 0.1);
+
+      & span {
+        margin: 0 5px;
+        font-size: 2.5rem;
+      }
+    }
+  }
+}
+
+#modal-death-screen {
+  & .modal {
+    box-shadow: inset 0 0 35px rgba($red, 0.9);
+
+    & p {
+      font-size: 2.2rem;
+    }
+  }
+}
+
+#modal-job-screen {
+  & .modal_container {
+    z-index: 5;
+  }
+}

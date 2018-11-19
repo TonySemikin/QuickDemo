@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'CabinSketch';
+  src: url(../assets/fonts/cabinsketch/CabinSketch-Regular.otf) format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'note_this';
+  src: url(../assets/fonts/note-this/Note_this.ttf) format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'daniel';
+  src: url(../assets/fonts/daniel/Daniel-Regular.otf) format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'cooper_hewitt';
+  src: url(../assets/fonts/cooper-hewitt/CooperHewitt-Light.otf) format('opentype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'cooper_hewitt';
+  src: url(../assets/fonts/cooper-hewitt/CooperHewitt-Medium.otf) format('opentype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'datalegreya_dot';
+  src: url(../assets/fonts/datalegreya/Datalegreya-Dot.otf) format('opentype');
+}

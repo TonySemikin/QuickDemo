@@ -1,0 +1,183 @@
+$dark-grey: rgba(30, 30, 34, 1);
+
+@media (max-width: 500px) {
+  #root {
+    & .login_container  {
+      animation: fadeIn 1s ease-out 0.5s;
+      animation-fill-mode: backwards;
+
+      background-position: -200px;
+
+      & h1 {
+        top: 2%;
+        width: 100%;
+        font-size: 2.3rem;
+      }
+
+      & .login_window {
+        min-width: 90%;
+
+        & label {
+          font-size: 1.6rem;
+        }
+      }
+    }
+
+    & .body {
+      height: calc(100% - 8rem);
+      top: 8rem;
+      background-position: 0px;
+
+      & .start_message {
+        font-size: 1.8rem;
+        top: 35%;
+        left: 40%;
+      }
+    }
+
+    & .navigation {
+      width: 100%;
+      height: 4rem;
+      top: 4rem;
+      align-content: center;
+
+      & ul {
+        width: 100%;
+      }
+
+      & a {
+        width: 10rem;
+
+        border-radius: 4px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+      }
+    }
+
+    & .status {
+      width: 100%;
+      height: 4rem;
+      top: 0;
+      background: black;
+
+      border-bottom: 1px solid $dark-grey;
+
+      & div {
+        margin: 0 2px;
+        font-size: 0.9rem;
+      }
+
+      & .username {
+        display: none;
+      }
+    }
+
+    & .jobs {
+      flex-flow: wrap;
+      align-content: center;
+
+      & ul {
+        height: 100%;
+      }
+
+      & li {
+        width: 11rem;
+        height: 13rem;
+
+        margin: 1rem 1.5rem;
+      }
+
+      & button {
+        width: 11rem;
+        height: 11rem;
+
+        font-size: 1.2rem;
+        background: rgba(255, 255, 255, 0.97);
+
+        &::after {
+          display: none;
+        }
+      }
+
+      & .requirements {
+        width: 11rem;
+        height: 2.5rem;
+
+        margin-top: 0.1rem;
+
+        background: rgba(0, 150, 0, .95);
+
+        font-size: 0.9rem;
+        line-height: 2.5rem;
+
+        &::after {
+          display: none;
+        }
+      }
+
+      & li.unavailable {
+        & button {
+          background: rgba(160, 160, 160, 0.95);
+
+          &::after {
+            display: none;
+          }
+        }
+
+        & .requirements {
+          background: rgba(160, 160, 160, 0.95);
+
+          &::after {
+            display: none;
+          }
+        }
+      }
+    }
+
+    & .purchases, .wives {
+      padding: 0;
+      & .standard_tile {
+        width: 42vw;
+        height: 42vw;
+
+        margin: 4vw 2vw;
+
+        & .name {
+          font-size: 0.8rem;
+        }
+
+        & .price p, .title p {
+          width: 100%;
+          height: 10%;
+          border-radius: 0;
+
+          font-size: 1rem;
+        }
+
+        & button {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  .modal_container {
+    & .modal {
+      min-width: 90%;
+
+      & h3 {
+        font-size: 1.5rem;
+      }
+
+      & .reward span {
+        font-size: 1.6rem;
+      }
+    }
+  }
+
+  #modal-death-screen {
+    & .modal p {
+      font-size: 1.5rem;
+    }
+  }
+}
